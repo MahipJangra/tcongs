@@ -180,9 +180,7 @@ export default function Navbar() {
               />
             </div>
 
-            <span className="font-display text-lg font-semibold text-white">
-              Tcongs<span className="text-signal-400">.</span>
-            </span>
+            
           </div>
 
           {/* =================================================
