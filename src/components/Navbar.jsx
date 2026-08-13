@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+7import { useEffect, useState } from "react";
 import { Menu, ArrowUpRight } from "lucide-react";
 import { navLinks } from "../data/content";
 
@@ -171,7 +171,7 @@ export default function Navbar() {
           {/* =================================================
               MOBILE LOGO
           ================================================= */}
-           =================================================
+           {/*=================================================
               MOBILE LINKS
           ================================================= */}
           <ul className="container-x flex flex-col gap-1 pt-6">
