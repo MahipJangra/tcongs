@@ -32,7 +32,7 @@ export default function Navbar() {
     >
       <nav className="container-x flex items-center justify-between" aria-label="Primary">
         <a href="#home" className="flex items-center gap-2 font-display text-lg font-semibold text-white">
-          <div className="h-8 w-8 rounded-lg flex items-center justify-center overflow-hidden">
+          <div className="h-20 w-20 rounded-lg flex items-center justify-center overflow-hidden">
             <img src="/logo.png" alt="Tcongs Infotech" className="h-full w-full object-contain" />
           </div>
           
