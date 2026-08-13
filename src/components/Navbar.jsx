@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu } from "lucide-react";
-import { ArrowUpRight } from "lucide-react";
+import { Menu, ArrowUpRight } from "lucide-react";
 import { navLinks } from "../data/content";
 
 export default function Navbar() {
@@ -27,7 +26,7 @@ export default function Navbar() {
   }, []);
 
   /* =====================================================
-     LOCK PAGE SCROLL WHEN MENU IS OPEN
+     LOCK PAGE SCROLL WHEN MOBILE MENU IS OPEN
   ===================================================== */
   useEffect(() => {
     if (open) {
@@ -45,7 +44,7 @@ export default function Navbar() {
   }, [open]);
 
   /* =====================================================
-     CLOSE AFTER NAVIGATION
+     CLOSE MENU AFTER NAVIGATION
   ===================================================== */
   const handleNavClick = () => {
     setOpen(false);
@@ -53,11 +52,11 @@ export default function Navbar() {
 
   return (
     <>
-      {/* =================================================
-          MAIN NAVBAR
-      ================================================= */}
+      {/* =====================================================
+          NAVBAR
+      ===================================================== */}
       <header
-        className={`fixed top-0 inset-x-0 z-[100] transition-all duration-300 ${
+        className={`fixed top-0 inset-x-0 z-[120] transition-all duration-300 ${
           scrolled
             ? "bg-ink-950/80 backdrop-blur-xl border-b border-white/[0.06] py-3"
             : "bg-transparent border-b border-transparent py-5"
@@ -67,7 +66,9 @@ export default function Navbar() {
           className="container-x flex items-center justify-between"
           aria-label="Primary"
         >
-          {/* LOGO */}
+          {/* =================================================
+              LOGO
+          ================================================= */}
           <a
             href="#home"
             onClick={handleNavClick}
@@ -82,7 +83,9 @@ export default function Navbar() {
             </div>
           </a>
 
-          {/* DESKTOP NAVIGATION */}
+          {/* =================================================
+              DESKTOP NAVIGATION
+          ================================================= */}
           <ul className="hidden lg:flex items-center gap-9">
             {navLinks.map((link) => (
               <li key={link.href}>
@@ -96,7 +99,9 @@ export default function Navbar() {
             ))}
           </ul>
 
-          {/* DESKTOP CTA */}
+          {/* =================================================
+              DESKTOP CTA
+          ================================================= */}
           <a
             href="#contact"
             className="hidden lg:inline-flex items-center gap-1.5 rounded-full bg-signal-500 px-5 py-2.5 font-display text-sm font-medium text-ink-950 transition-all duration-300 hover:bg-signal-400 hover:shadow-[0_0_24px_rgba(47,209,201,0.35)]"
@@ -105,34 +110,40 @@ export default function Navbar() {
             <ArrowUpRight size={15} />
           </a>
 
-          {/* MOBILE MENU BUTTON */}
+          {/* =================================================
+              MOBILE MENU BUTTON
+
+              No X button.
+              Same hamburger button opens/closes menu.
+          ================================================= */}
           <button
             type="button"
-            className="lg:hidden relative z-[120] flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-white"
-            aria-label="Open menu"
+            className="lg:hidden relative z-[200] flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-white"
+            aria-label="Toggle menu"
             aria-expanded={open}
             onClick={() => setOpen((value) => !value)}
           >
-            <Menu size={20} />
+            <Menu size={22} />
           </button>
         </nav>
       </header>
 
-      {/* =================================================
+      {/* =====================================================
           MOBILE MENU OVERLAY
-
-          Clicking this background closes the menu.
-      ================================================= */}
+          
+          IMPORTANT:
+          The overlay covers the whole screen.
+          Clicking its empty area closes the menu.
+      ===================================================== */}
       <div
         className={`
           lg:hidden fixed inset-0 z-[110]
-          min-h-[100dvh]
           bg-[#06080F]
           transition-all duration-300 ease-out
           ${
             open
-              ? "opacity-100 translate-y-0 pointer-events-auto visible"
-              : "opacity-0 -translate-y-3 pointer-events-none invisible"
+              ? "opacity-100 visible pointer-events-auto"
+              : "opacity-0 invisible pointer-events-none"
           }
         `}
         style={{
@@ -144,14 +155,23 @@ export default function Navbar() {
         {/* =================================================
             MENU CONTENT
 
-            Clicking inside this area does NOT close menu.
+            IMPORTANT:
+            DO NOT use min-h-[100dvh] here.
+
+            This content only occupies the actual menu area.
+            Therefore, the empty area underneath receives the
+            click and closes the menu.
         ================================================= */}
         <div
-          className="min-h-[100dvh] w-full bg-[#06080F]"
-          onClick={(event) => event.stopPropagation()}
+          className="w-full bg-[#06080F] pt-[96px]"
+          onClick={(event) => {
+            event.stopPropagation();
+          }}
         >
-          {/* MOBILE LOGO */}
-          <div className="container-x flex items-center gap-2 pt-5 pb-2">
+          {/* =================================================
+              MOBILE LOGO
+          ================================================= */}
+          <div className="container-x flex items-center gap-2 pb-2">
             <div className="h-8 w-8 rounded-lg flex items-center justify-center overflow-hidden">
               <img
                 src="/logo.png"
@@ -165,7 +185,9 @@ export default function Navbar() {
             </span>
           </div>
 
-          {/* MOBILE NAVIGATION */}
+          {/* =================================================
+              MOBILE LINKS
+          ================================================= */}
           <ul className="container-x flex flex-col gap-1 pt-6">
             {navLinks.map((link, index) => (
               <li
@@ -191,7 +213,9 @@ export default function Navbar() {
             ))}
           </ul>
 
-          {/* MOBILE CTA */}
+          {/* =================================================
+              MOBILE CTA
+          ================================================= */}
           <div className="container-x mt-8">
             <a
               href="#contact"
