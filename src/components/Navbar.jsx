@@ -171,19 +171,7 @@ export default function Navbar() {
           {/* =================================================
               MOBILE LOGO
           ================================================= */}
-          <div className="container-x flex items-center gap-2 pb-2">
-            <div className="h-8 w-8 rounded-lg flex items-center justify-center overflow-hidden">
-              <img
-                src="/logo.png"
-                alt="Tcongs Infotech"
-                className="h-full w-full object-contain"
-              />
-            </div>
-
-            
-          </div>
-
-          {/* =================================================
+           =================================================
               MOBILE LINKS
           ================================================= */}
           <ul className="container-x flex flex-col gap-1 pt-6">
