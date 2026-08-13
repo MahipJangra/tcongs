@@ -11,10 +11,10 @@ npm run build      # production build -> dist/
 npm run preview    # preview the production build
 ```
 
-## Deploying to Vercel
+## Deploying to Render
 
 1. Push this folder to a GitHub repo.
-2. Import the repo in Vercel.
+2. Import the repo in Render.
 3. Framework preset: **Vite**. Build command: `npm run build`. Output directory: `dist`.
 4. Deploy.
 
