@@ -35,7 +35,7 @@ export default function Navbar() {
           <div className="h-8 w-8 rounded-lg flex items-center justify-center overflow-hidden">
             <img src="/logo.png" alt="Tcongs Infotech" className="h-full w-full object-contain" />
           </div>
-          Tcongs<span className="text-signal-400">.</span>
+          
         </a>
 
         <ul className="hidden lg:flex items-center gap-9">
