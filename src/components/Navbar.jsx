@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { navLinks } from "../data/content";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
-  // Detect scroll position
+  /* =====================================================
+     SCROLL DETECTION
+  ===================================================== */
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 24);
@@ -23,28 +26,36 @@ export default function Navbar() {
     };
   }, []);
 
-  // Lock page scrolling when mobile menu is open
+  /* =====================================================
+     LOCK PAGE SCROLL WHEN MENU IS OPEN
+  ===================================================== */
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     }
 
     return () => {
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     };
   }, [open]);
 
+  /* =====================================================
+     CLOSE AFTER NAVIGATION
+  ===================================================== */
   const handleNavClick = () => {
     setOpen(false);
   };
 
   return (
     <>
-      {/* =====================================================
-          DESKTOP / MAIN NAVBAR
-      ===================================================== */}
+      {/* =================================================
+          MAIN NAVBAR
+      ================================================= */}
       <header
         className={`fixed top-0 inset-x-0 z-[100] transition-all duration-300 ${
           scrolled
@@ -56,9 +67,10 @@ export default function Navbar() {
           className="container-x flex items-center justify-between"
           aria-label="Primary"
         >
-          {/* ================= LOGO ================= */}
+          {/* LOGO */}
           <a
             href="#home"
+            onClick={handleNavClick}
             className="flex items-center gap-2 font-display text-lg font-semibold text-white"
           >
             <div className="h-20 w-20 rounded-lg flex items-center justify-center overflow-hidden">
@@ -70,7 +82,7 @@ export default function Navbar() {
             </div>
           </a>
 
-          {/* ================= DESKTOP LINKS ================= */}
+          {/* DESKTOP NAVIGATION */}
           <ul className="hidden lg:flex items-center gap-9">
             {navLinks.map((link) => (
               <li key={link.href}>
@@ -84,7 +96,7 @@ export default function Navbar() {
             ))}
           </ul>
 
-          {/* ================= DESKTOP CTA ================= */}
+          {/* DESKTOP CTA */}
           <a
             href="#contact"
             className="hidden lg:inline-flex items-center gap-1.5 rounded-full bg-signal-500 px-5 py-2.5 font-display text-sm font-medium text-ink-950 transition-all duration-300 hover:bg-signal-400 hover:shadow-[0_0_24px_rgba(47,209,201,0.35)]"
@@ -93,31 +105,28 @@ export default function Navbar() {
             <ArrowUpRight size={15} />
           </a>
 
-          {/* ================= MOBILE BUTTON ================= */}
+          {/* MOBILE MENU BUTTON */}
           <button
             type="button"
             className="lg:hidden relative z-[120] flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-white"
-            aria-label={open ? "Close menu" : "Open menu"}
+            aria-label="Open menu"
             aria-expanded={open}
             onClick={() => setOpen((value) => !value)}
           >
-            {open ? <X size={20} /> : <Menu size={20} />}
+            <Menu size={20} />
           </button>
         </nav>
       </header>
 
-      {/* =====================================================
-          MOBILE MENU
+      {/* =================================================
+          MOBILE MENU OVERLAY
 
-          IMPORTANT:
-          This is OUTSIDE the header.
-
-          Therefore backdrop-blur on the header cannot
-          affect this menu.
-      ===================================================== */}
+          Clicking this background closes the menu.
+      ================================================= */}
       <div
         className={`
           lg:hidden fixed inset-0 z-[110]
+          min-h-[100dvh]
           bg-[#06080F]
           transition-all duration-300 ease-out
           ${
@@ -130,10 +139,18 @@ export default function Navbar() {
           backgroundColor: "#06080F",
           isolation: "isolate",
         }}
+        onClick={() => setOpen(false)}
       >
-        {/* ================= MOBILE MENU CONTENT ================= */}
-        <div className="min-h-screen w-full bg-[#06080F]">
-          {/* Mobile Menu Logo */}
+        {/* =================================================
+            MENU CONTENT
+
+            Clicking inside this area does NOT close menu.
+        ================================================= */}
+        <div
+          className="min-h-[100dvh] w-full bg-[#06080F]"
+          onClick={(event) => event.stopPropagation()}
+        >
+          {/* MOBILE LOGO */}
           <div className="container-x flex items-center gap-2 pt-5 pb-2">
             <div className="h-8 w-8 rounded-lg flex items-center justify-center overflow-hidden">
               <img
@@ -148,7 +165,7 @@ export default function Navbar() {
             </span>
           </div>
 
-          {/* ================= MOBILE LINKS ================= */}
+          {/* MOBILE NAVIGATION */}
           <ul className="container-x flex flex-col gap-1 pt-6">
             {navLinks.map((link, index) => (
               <li
@@ -174,7 +191,7 @@ export default function Navbar() {
             ))}
           </ul>
 
-          {/* ================= MOBILE CTA ================= */}
+          {/* MOBILE CTA */}
           <div className="container-x mt-8">
             <a
               href="#contact"
