@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { navLinks } from "../data/content";
 
-
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -33,9 +32,10 @@ export default function Navbar() {
     >
       <nav className="container-x flex items-center justify-between" aria-label="Primary">
         <a href="#home" className="flex items-center gap-2 font-display text-lg font-semibold text-white">
-          <div className="h-[25%] w-[25%] rounded-lg flex items-center justify-center">
-            <img src="/public/logo.png" alt="" />
+          <div className="h-8 w-8 rounded-lg flex items-center justify-center overflow-hidden">
+            <img src="/logo.png" alt="Tcongs Infotech" className="h-full w-full object-contain" />
           </div>
+          Tcongs<span className="text-signal-400">.</span>
         </a>
 
         <ul className="hidden lg:flex items-center gap-9">
@@ -61,7 +61,7 @@ export default function Navbar() {
 
         <button
           type="button"
-          className="lg:hidden flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-white"
+          className="lg:hidden relative z-[70] flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-white"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -72,14 +72,20 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
-        className={`lg:hidden fixed inset-x-0 top-[60px] bottom-0 bg-ink-950/98 backdrop-blur-xl transition-all duration-300 ease-out ${
+        className={`lg:hidden fixed inset-0 z-[60] bg-[#06080F] transition-all duration-300 ease-out ${
           open ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-3 pointer-events-none"
         }`}
       >
-<div className="h-[25%] w-[25%] rounded-lg flex items-center justify-center">
-            <img src="/public/logo.png" alt="" />
+        <div className="container-x flex items-center gap-2 pt-5 pb-2">
+          <div className="h-8 w-8 rounded-lg flex items-center justify-center overflow-hidden">
+            <img src="/logo.png" alt="Tcongs Infotech" className="h-full w-full object-contain" />
           </div>
-        <ul className="container-x flex flex-col gap-1 pt-8">
+          <span className="font-display text-lg font-semibold text-white">
+            Tcongs<span className="text-signal-400">.</span>
+          </span>
+        </div>
+
+        <ul className="container-x flex flex-col gap-1 pt-6">
           {navLinks.map((link, i) => (
             <li
               key={link.href}
