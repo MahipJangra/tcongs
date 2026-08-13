@@ -1,4 +1,4 @@
-7import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, ArrowUpRight } from "lucide-react";
 import { navLinks } from "../data/content";
 
@@ -53,7 +53,7 @@ export default function Navbar() {
   return (
     <>
       {/* =====================================================
-          NAVBAR
+          MAIN NAVBAR
       ===================================================== */}
       <header
         className={`fixed top-0 inset-x-0 z-[120] transition-all duration-300 ${
@@ -67,12 +67,12 @@ export default function Navbar() {
           aria-label="Primary"
         >
           {/* =================================================
-              LOGO
+              LOGO — IMAGE ONLY
           ================================================= */}
           <a
             href="#home"
             onClick={handleNavClick}
-            className="flex items-center gap-2 font-display text-lg font-semibold text-white"
+            className="flex items-center"
           >
             <div className="h-20 w-20 rounded-lg flex items-center justify-center overflow-hidden">
               <img
@@ -112,9 +112,6 @@ export default function Navbar() {
 
           {/* =================================================
               MOBILE MENU BUTTON
-
-              No X button.
-              Same hamburger button opens/closes menu.
           ================================================= */}
           <button
             type="button"
@@ -130,10 +127,8 @@ export default function Navbar() {
 
       {/* =====================================================
           MOBILE MENU OVERLAY
-          
-          IMPORTANT:
-          The overlay covers the whole screen.
-          Clicking its empty area closes the menu.
+
+          Clicking the empty area closes the menu.
       ===================================================== */}
       <div
         className={`
@@ -153,14 +148,10 @@ export default function Navbar() {
         onClick={() => setOpen(false)}
       >
         {/* =================================================
-            MENU CONTENT
+            MOBILE MENU CONTENT
 
-            IMPORTANT:
-            DO NOT use min-h-[100dvh] here.
-
-            This content only occupies the actual menu area.
-            Therefore, the empty area underneath receives the
-            click and closes the menu.
+            No logo.
+            No Tcongs text.
         ================================================= */}
         <div
           className="w-full bg-[#06080F] pt-[96px]"
@@ -169,23 +160,7 @@ export default function Navbar() {
           }}
         >
           {/* =================================================
-              MOBILE LOGO
-          ================================================= */}
-<div className="container-x flex items-center gap-2 pb-2">
-            <div className="h-8 w-8 rounded-lg flex items-center justify-center overflow-hidden">
-              <img
-                src="/logo.png"
-                alt="Tcongs Infotech"
-                className="h-full w-full object-contain"
-              />
-            </div>
-
-            
-          </div>
-
-          
-           {/*=================================================
-              MOBILE LINKS
+              MOBILE NAVIGATION LINKS
           ================================================= */}
           <ul className="container-x flex flex-col gap-1 pt-6">
             {navLinks.map((link, index) => (
